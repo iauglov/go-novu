@@ -19,6 +19,11 @@ const (
 	DIRECT             = "DIRECT"
 )
 
+const (
+	ChatProviderSlack   = "slack"
+	ChatProviderDiscord = "discord"
+)
+
 type Data struct {
 	Acknowledged bool   `json:"acknowledged"`
 	Status       string `json:"status"`
@@ -76,4 +81,14 @@ type EventRequest struct {
 
 type SubscriberResponse struct {
 	Data interface{} `json:"data"`
+}
+
+type SubscriberCredentialsRequest struct {
+	ProviderId  string             `json:"providerId"`
+	Credentials ChannelCredentials `json:"credentials"`
+}
+
+type ChannelCredentials struct {
+	WebhookUrl   string   `json:"webhookUrl"`
+	DeviceTokens []string `json:"deviceTokens"`
 }

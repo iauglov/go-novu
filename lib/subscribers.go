@@ -5,14 +5,16 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/pkg/errors"
 	"net/http"
+
+	"github.com/pkg/errors"
 )
 
 type ISubscribers interface {
 	Identify(ctx context.Context, subscriberID string, data interface{}) (SubscriberResponse, error)
 	Update(ctx context.Context, subscriberID string, data interface{}) (SubscriberResponse, error)
 	Delete(ctx context.Context, subscriberID string) (SubscriberResponse, error)
+	SetCredentials(ctx context.Context, subscriberId, providerId string, credentials ChannelCredentials) (SubscriberResponse, error)
 }
 
 type SubscriberService service
@@ -65,6 +67,30 @@ func (s *SubscriberService) Delete(ctx context.Context, subscriberID string) (Su
 	URL := fmt.Sprintf(s.client.config.BackendURL+"/subscribers/%s", subscriberID)
 
 	req, err := http.NewRequestWithContext(ctx, http.MethodDelete, URL, http.NoBody)
+	if err != nil {
+		return resp, err
+	}
+
+	err = s.client.sendRequest(req, &resp)
+	if err != nil {
+		return resp, err
+	}
+
+	return resp, nil
+}
+
+func (s *SubscriberService) SetCredentials(ctx context.Context, subscriberId, providerId string, credentials ChannelCredentials) (SubscriberResponse, error) {
+	var resp SubscriberResponse
+	URL := fmt.Sprintf(s.client.config.BackendURL+"/subscribers/%s/credentials", subscriberId)
+
+	body := SubscriberCredentialsRequest{
+		ProviderId:  providerId,
+		Credentials: credentials,
+	}
+
+	jsonBody, _ := json.Marshal(body)
+
+	req, err := http.NewRequestWithContext(ctx, http.MethodPut, URL, bytes.NewBuffer(jsonBody))
 	if err != nil {
 		return resp, err
 	}
