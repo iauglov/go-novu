@@ -22,6 +22,7 @@ const (
 const (
 	ChatProviderSlack   = "slack"
 	ChatProviderDiscord = "discord"
+	PushProviderFCM     = "fcm"
 )
 
 type Data struct {
