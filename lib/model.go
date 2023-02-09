@@ -2,7 +2,6 @@ package lib
 
 import "io"
 
-type ChannelType string
 type GeneralError error
 
 const Version = "v1"
@@ -35,8 +34,9 @@ type Response struct {
 }
 
 type ITriggerPayloadOptions struct {
-	To      interface{} `json:"to,omitempty"`
-	Payload interface{} `json:"payload,omitempty"`
+	To        interface{} `json:"to,omitempty"`
+	Payload   interface{} `json:"payload,omitempty"`
+	Overrides Overrides   `json:"overrides,omitempty""`
 }
 
 type TriggerRecipientsTypeArray interface {
@@ -75,9 +75,10 @@ type EventResponse struct {
 }
 
 type EventRequest struct {
-	Name    string      `json:"name"`
-	To      interface{} `json:"to"`
-	Payload interface{} `json:"payload"`
+	Name      string      `json:"name"`
+	To        interface{} `json:"to"`
+	Payload   interface{} `json:"payload"`
+	Overrides Overrides   `json:"overrides"`
 }
 
 type SubscriberResponse struct {
@@ -87,9 +88,4 @@ type SubscriberResponse struct {
 type SubscriberCredentialsRequest struct {
 	ProviderId  string             `json:"providerId"`
 	Credentials ChannelCredentials `json:"credentials"`
-}
-
-type ChannelCredentials struct {
-	WebhookUrl   string   `json:"webhookUrl"`
-	DeviceTokens []string `json:"deviceTokens"`
 }
