@@ -24,7 +24,7 @@ type Fcm struct {
 }
 
 type Overrides struct {
-	Fcm Fcm `json:"fcm"`
+	Fcm Fcm `json:"fcm,omitempty"`
 }
 
 type ChannelCredentials struct {
