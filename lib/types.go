@@ -15,8 +15,12 @@ func (e TypeEnum) String() string {
 }
 
 type Fcm struct {
-	Type TypeEnum    `json:"type"`
-	Data interface{} `json:"data"`
+	Type       TypeEnum    `json:"type"`
+	Data       interface{} `json:"data"`
+	Apns       interface{} `json:"apns"`
+	WebPush    interface{} `json:"webPush"`
+	Android    interface{} `json:"android"`
+	FcmOptions interface{} `json:"fcmOptions"`
 }
 
 type Overrides struct {
