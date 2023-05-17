@@ -1,4 +1,4 @@
-module github.com/lonesta/go-novu
+module github.com/iauglov/go-novu
 
 go 1.18
 

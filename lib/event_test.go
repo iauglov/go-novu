@@ -13,7 +13,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/lonesta/go-novu/lib"
+	"github.com/iauglov/go-novu/lib"
 	"github.com/stretchr/testify/require"
 
 	"github.com/stretchr/testify/assert"

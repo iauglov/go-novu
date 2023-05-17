@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	novu "github.com/lonesta/go-novu/lib"
+	novu "github.com/iauglov/go-novu/lib"
 )
 
 func main() {
